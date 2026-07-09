@@ -51,7 +51,7 @@
     </style>
 </head>
 <body>
-		<div id="waitOverlay" class="hidden">
+	<div id="waitOverlay" class="hidden">
 	  <div class="spinner"></div>
 	</div>	
 	<p><a href="index.html">Go to StrokesPlus.net</a></p>
@@ -129,7 +129,7 @@
 			} else {
 				resultsContainer.innerHTML = distinctForums.map(item => `
 					<div class="item">
-						<p><b><a href="/?f=${encodeURIComponent(item.Forum)}">${item.Category || 'No Category'} - ${item.Forum || 'No Forum'}</a></b></p>
+						<p><b><a href="/cindex.html?f=${encodeURIComponent(item.Forum)}">${item.Category || 'No Category'} - ${item.Forum || 'No Forum'}</a></b></p>
 					</div>
 				`).join('');
 			}
@@ -170,11 +170,11 @@
 				if(forumName == "null") forumName = "";
 				
 				if(page > 1) {
-					previous = `<p><b><a href='/?t=${topicId}&u=${encodeURIComponent(userName)}&p=${page-1}&t=${topicId}&f=${encodeURIComponent(forumName)}'>Previous</a></b></p>`;
+					previous = `<p><b><a href='/cindex.html?t=${topicId}&u=${encodeURIComponent(userName)}&p=${page-1}&t=${topicId}&f=${encodeURIComponent(forumName)}'>Previous</a></b></p>`;
 				}
 				
 				if(endIndex + 1 < items.length){
-					next = `<p><b><a href='/?t=${topicId}&u=${encodeURIComponent(userName)}&p=${page+1}&f=${encodeURIComponent(forumName)}'>Next</a></b></p>`;
+					next = `<p><b><a href='/cindex.html?t=${topicId}&u=${encodeURIComponent(userName)}&p=${page+1}&f=${encodeURIComponent(forumName)}'>Next</a></b></p>`;
 				}
 				
 			} else {
@@ -195,9 +195,9 @@
 			
             resultsContainer.innerHTML = forumHeading + previous + pagedList.map((item,index) => `
                 <div class="item">
-                    <h3 class="search"><a href='/?t=${item.TopicID}'>${item.Topic || 'No Title'}</a></h3>
+                    <h3 class="search"><a href='/cindex.html?t=${item.TopicID}'>${item.Topic || 'No Title'}</a></h3>
 					<p><b>${item.Category || 'No Category'} - ${item.Forum || 'No Forum'}</b></p>
-					<p>Topic By: <a href='/?u=${encodeURIComponent(item.TopicPostedBy)}'><b>${item.TopicPostedBy}</b></a> on ${item.TopicPostedOn.replace('T',' ')} - Message By: <a href='/?u=${encodeURIComponent(item.MessagePostedBy)}'><b>${item.MessagePostedBy}</b></a> on ${item.MessagePostedOn.replace('T',' ')}</p>
+					<p>Topic By: <a href='/cindex.html?u=${encodeURIComponent(item.TopicPostedBy)}'><b>${item.TopicPostedBy}</b></a> on ${item.TopicPostedOn.replace('T',' ')} - Message By: <a href='/cindex.html?u=${encodeURIComponent(item.MessagePostedBy)}'><b>${item.MessagePostedBy}</b></a> on ${item.MessagePostedOn.replace('T',' ')}</p>
 					<hr />
 					<p class="search">${item.Message || 'No Message'}</p>
                 </div>
