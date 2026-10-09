@@ -11,6 +11,10 @@
         .item h3 { margin: 0 0 5px 0; color: #333; }
         .item p { margin: 0; color: #666; }
         .no-results { color: #999; font-style: italic; }
+        .io-banner { padding: 16px 20px; margin-bottom: 24px; border: 2px solid #007bff; border-radius: 8px; background: #eef5ff; }
+        .io-banner h2 { margin: 0 0 8px 0; }
+        .io-banner p { margin: 0 0 8px 0; }
+        .io-banner p:last-child { margin-bottom: 0; }
 		::highlight(search-results) {
 			  background-color: yellow;
 			  color: black;
@@ -54,13 +58,18 @@
 	<div id="waitOverlay" class="hidden">
 	  <div class="spinner"></div>
 	</div>	
+	<div class="io-banner">
+		<h2>StrokesPlus is now Input.Observer.</h2>
+		<p>Input.Observer is my new Windows app for mouse gestures, hotkeys and text expansion, rebuilt from the ground up. It imports your StrokesPlus.net settings, and if you donated, translated, posted in the forums or signed in to StrokesPlus.net, your license is free.</p>
+		<p><a href="https://input.observer/strokesplus-story">What happened to StrokesPlus?</a>  |  <a href="https://input.observer/download">Download Input.Observer</a>  |  <a href="https://input.observer/pricing">Claim your free license</a>  |  <a href="https://input.observer/forum">Forum</a></p>
+	</div>
 	<p><a href="index.html">Go to StrokesPlus.net</a></p>
 	<p><b>2.8.6.4 Downloads:</b> <a href="/StrokesPlusSetup_2.8.6.4_x64_Signed.exe">S+ Installer (64-bit)</a> | <a href="/StrokesPlusSetup_2.8.6.4_x86_Signed.exe">S+ Installer (32-bit)</a></p>
-	<p><a href="https://github.com/roblarky/roblarky.github.io/discussions" target="_blank">Discussions</a>  |  <a href="/cChangeLog.txt" target="_blank">Change Log</a></p>
-	
-    <h2><a href="/cindex.html">Search StrokesPlus Forum Archive</a></h2>
+	<p><a href="https://input.observer/forum" target="_blank">Forum</a>  |  <a href="/cChangeLog.txt" target="_blank">Change Log</a></p>
+
+    <h2><a href="/cindex.html">StrokesPlus Forum Archive (read-only)</a></h2>
     <!-- Search Box Component -->
-    <input type="text" id="searchBox" placeholder="Exact match search only...">
+    <input type="text" id="searchBox" aria-label="Search the archive" placeholder="Search the archive (exact phrase)...">
 
     <!-- Display Container Component -->
     <div id="resultsContainer"></div>
@@ -200,7 +209,7 @@
 					<p><b>${item.Category || 'No Category'} - ${item.Forum || 'No Forum'}</b></p>
 					<p>Topic By: <a href='/cindex.html?u=${encodeURIComponent(item.TopicPostedBy)}'><b>${item.TopicPostedBy}</b></a> on ${item.TopicPostedOn.replace('T',' ')} - Message By: <a href='/cindex.html?u=${encodeURIComponent(item.MessagePostedBy)}'><b>${item.MessagePostedBy}</b></a> on ${item.MessagePostedOn.replace('T',' ')}</p>
 					<hr />
-					<p class="search">${item.Message || 'No Message'}</p>
+					<p class="search">${archiveLinks(item.Message) || 'No Message'}</p>
                 </div>
             `).join('') + next;
 			
@@ -322,6 +331,15 @@
 		const doneTypingInterval = 1000; // Time in milliseconds (1.0 seconds)
 		const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 		
+		// Links to topics on the old forums point at the same topic in this archive (the topic IDs match).
+		function archiveLinks(html) {
+			if (!html) return html;
+			return html
+				.replace(/(?:https?:\/\/)?(?:www\.)?strokesplus\.com\/forum\/topic\.asp\?(?:[^'"\s<]*?&)?TOPIC_ID=(\d+)[^'"\s<]*/gi, '/cindex.html?t=$1')
+				.replace(/https?:\/\/(?:www\.)?strokesplus\.com\/forum\/topic\/(\d+)(?:\/[\w-]*)?/gi, '/cindex.html?t=$1')
+				.replace(/https?:\/\/forum\.strokesplus\.net\/posts\/t(\d+)(?:-[\w-]*)?/gi, '/?t=$1');
+		}
+
 		const overlay = document.getElementById('waitOverlay');
 		
 		function showOverlay() {
