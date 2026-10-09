@@ -336,9 +336,10 @@
 		function archiveLinks(html) {
 			if (!html) return html;
 			return html
-				.replace(/(?:https?:\/\/)?(?:www\.)?strokesplus\.com\/forum\/topic\.asp\?(?:[^'"\s<]*?&)?TOPIC_ID=(\d+)[^'"\s<]*/gi, '/cindex.html?t=$1')
-				.replace(/https?:\/\/(?:www\.)?strokesplus\.com\/forum\/topic\/(\d+)(?:\/[\w-]*)?/gi, '/cindex.html?t=$1')
-				.replace(/https?:\/\/forum\.strokesplus\.net\/posts\/t(\d+)(?:-[\w-]*)?/gi, '/?t=$1');
+				.replace(/(?:https?:\/\/)?(?:www\.)?strokesplus\.com\/forum\/topic\.asp\?(?:[^'"\s<]*?&)?TOPIC_ID=(\d+)[^'"\s<]*/gi, 'https://strokesplus.net/cindex.html?t=$1')
+				.replace(/https?:\/\/(?:www\.)?strokesplus\.com\/forum\/topic\/(\d+)(?:\/[\w-]*)?/gi, 'https://strokesplus.net/cindex.html?t=$1')
+				.replace(/https?:\/\/forum\.strokesplus\.net\/posts\/t(\d+)(?:-[\w-]*)?/gi, 'https://strokesplus.net/?t=$1')
+				.replace(/https?:\/\/forum\.strokesplus\.net\/?(?=['"\s<]|$)/gi, 'https://strokesplus.net/');
 		}
 
 		const overlay = document.getElementById('waitOverlay');
