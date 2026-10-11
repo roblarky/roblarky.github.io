@@ -1,361 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StrokesPlus.net - Forum Archive Search</title>
-    <style>
-        body { font-family: Arial, sans-serif; /*max-width: 600px;*/ margin: 40px auto; padding: 20px; }
-        input { width: 100%; padding: 10px; margin-bottom: 20px; font-size: 16px; box-sizing: border-box; }
-        .item { padding: 15px; border: 1px solid #ddd; margin-bottom: 10px; border-radius: 5px; background: #f9f9f9; }
-        .item h3 { margin: 0 0 5px 0; color: #333; }
-        .item p { margin: 0; color: #666; }
-        .no-results { color: #999; font-style: italic; }
-        .io-banner { padding: 16px 20px; margin-bottom: 24px; border: 2px solid #007bff; border-radius: 8px; background: #eef5ff; }
-        .io-banner h2 { margin: 0 0 8px 0; }
-        .io-banner p { margin: 0 0 8px 0; }
-        .io-banner p:last-child { margin-bottom: 0; }
-		::highlight(search-results) {
-			  background-color: yellow;
-			  color: black;
-			}
-		  #waitOverlay {
-			position: fixed;
-			top: 0; left: 0; width: 100vw; height: 100vh;
-			background: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
-			z-index: 999999; /* Ensure it's on top of all elements */
-			cursor: wait !important;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			opacity: 0;
-			visibility: hidden;
-			transition: opacity 0.2s ease, visibility 0.2s ease;
-		  }
-
-		  #waitOverlay.active {
-			opacity: 1;
-			visibility: visible;
-		  }
-
-		  /* Optional spinning animation */
-		  .spinner {
-			width: 50px; height: 50px;
-			border: 5px solid #ccc;
-			border-top-color: #007bff;
-			border-radius: 50%;
-			animation: spin 1s linear infinite;
-		  }
-
-		  @keyframes spin { to { transform: rotate(360deg); } }
-
-		  body.is-waiting, body.is-waiting * {
-			cursor: wait !important;
-		  }			
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>StrokesPlus.net mouse gestures: forum archive and downloads</title>
+	<meta name="description" content="Read-only archive of the StrokesPlus.net forum and the final StrokesPlus.net download. StrokesPlus is now Input.Observer: gestures, hotkeys and text expansion for Windows.">
+	<link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="stylesheet" href="/assets/site.css">
 </head>
-<body>
-	<div id="waitOverlay" class="hidden">
-	  <div class="spinner"></div>
-	</div>	
-	<div class="io-banner">
-		<h2>StrokesPlus is now Input.Observer.</h2>
-		<p>Input.Observer is my new Windows app for mouse gestures, hotkeys and text expansion, rebuilt from the ground up. It imports your StrokesPlus.net settings, and if you donated, translated, posted in the forums or signed in to StrokesPlus.net, your license is free.</p>
-		<p><a href="https://input.observer/strokesplus-story">What happened to StrokesPlus?</a>  |  <a href="https://input.observer/download">Download Input.Observer</a>  |  <a href="https://input.observer/pricing">Claim your free license</a>  |  <a href="https://input.observer/forum">Forum</a></p>
-	</div>
-	<p><a href="cindex.html">Go to Classic StrokesPlus</a></p>
+<body data-json="/data.json" data-base="/">
+	<div id="waitOverlay" aria-hidden="true"><div class="spinner"></div></div>
 
+	<header class="site-header">
+		<div class="wrap">
+			<a class="brand" href="/">StrokesPlus <span>archive</span></a>
+			<nav class="site-nav" aria-label="Archive">
+				<a href="/" aria-current="page">StrokesPlus.net</a>
+				<a href="/cindex.html">StrokesPlus (classic)</a>
+				<a href="https://input.observer/forum">Forum</a>
+			</nav>
+		</div>
+	</header>
 
-	<p><b>0.5.8.0 Downloads:</b> <a href="/StrokesPlus.net_Setup_0.5.8.0.exe">S+ Installer</a> | <a href="/StrokesPlus.net_Setup_0.5.8.0_Trace.exe">S+ Installer Trace EXE</a>  |  <a href="/StrokesPlus.net_Portable_0.5.8.0.zip">S+ Portable</a>  |  <a href="/StrokesPlus.net_Portable_0.5.8.0_Trace.zip">S+ Portable Trace EXE</a></p>
-	<p><a href="https://input.observer/forum" target="_blank">Forum</a>  |  <a href="/ChangeLog.txt" target="_blank">Change Log</a></p>
-    <h2><a href="/">StrokesPlus.net Forum Archive (read-only)</a></h2>
-    <!-- Search Box Component -->
-    <input type="text" id="searchBox" aria-label="Search the archive" placeholder="Search the archive (exact phrase)...">
+	<main class="wrap">
+		<section class="io-banner" aria-labelledby="io-banner-title">
+			<img class="io-banner-logo" src="/assets/orbit.svg" alt="" width="56" height="56">
+			<div>
+				<p class="io-kicker">Draw it. Type it. Done.</p>
+				<h2 id="io-banner-title">StrokesPlus is now Input.Observer</h2>
+				<p>Input.Observer is my new Windows app for gestures, hotkeys and text expansion: draw a shape, press a key or type a short code, and it runs the action you set for that app. It is rebuilt from the ground up, and its engine makes no network connections.</p>
+				<p>It brings over your StrokesPlus.net setup. Gestures, hotkeys, app groups and settings come across; scripts are translated where possible, so a script-heavy setup needs some hand work.</p>
+				<p>If you donated to StrokesPlus or StrokesPlus.net (any amount), translated either app, made 5 or more posts across the two forums, signed in to StrokesPlus.net from the app, or wrote to me about StrokesPlus, your Input.Observer 1.x license is free.</p>
+				<div class="io-actions">
+					<a class="button button-primary" href="https://input.observer/download">Download Input.Observer</a>
+					<a class="button" href="https://input.observer/pricing">Claim your free license</a>
+					<a class="button" href="https://input.observer/strokesplus-story">What happened to StrokesPlus?</a>
+				</div>
+			</div>
+		</section>
 
-    <!-- Display Container Component -->
-    <div id="resultsContainer"></div>
+		<section class="panel" aria-labelledby="downloads-title">
+			<h2 id="downloads-title">StrokesPlus.net 0.5.8.0, the final release</h2>
+			<p class="panel-note">No longer updated. <a href="/ChangeLog.txt">Change log</a></p>
+			<ul class="downloads">
+				<li><a href="/StrokesPlus.net_Setup_0.5.8.0.exe">Installer <small>.exe</small></a></li>
+				<li><a href="/StrokesPlus.net_Portable_0.5.8.0.zip">Portable <small>.zip</small></a></li>
+				<li><a href="/StrokesPlus.net_Setup_0.5.8.0_Trace.exe">Installer, trace build <small>.exe</small></a></li>
+				<li><a href="/StrokesPlus.net_Portable_0.5.8.0_Trace.zip">Portable, trace build <small>.zip</small></a></li>
+			</ul>
+		</section>
 
-    <script>
-        let jsonData = [];
-        const searchBox = document.getElementById('searchBox');
-        const resultsContainer = document.getElementById('resultsContainer');
+		<section aria-labelledby="archive-title">
+			<div class="archive-head">
+				<h2 id="archive-title"><a href="/">StrokesPlus.net forum archive</a></h2>
+				<p>Read-only. Ask new questions in the <a href="https://input.observer/forum">Input.Observer forum</a>.</p>
+			</div>
+			<input type="search" id="searchBox" class="search" aria-label="Search the archive" placeholder="Search the archive (exact phrase)">
+			<div id="resultsContainer" aria-live="polite"></div>
+		</section>
+	</main>
 
-        // 1. Read the local JSON file
-        async function loadData() {
-            try {
-                // Replace 'data.json' with your local JSON filename
-                const response = await fetch('/data.json'); 
-                if (!response.ok) throw new Error('Network response error');
-                jsonData = await response.json();
-				var topicId = new URLSearchParams(window.location.search).get('t');
-				if(topicId == "null") topicId = "";
-				var userName = new URLSearchParams(window.location.search).get('u');
-				if(userName == "null") userName = "";
-				if(parseInt(topicId) > 0)
-				{
-					const filteredData = jsonData.filter(item => {
-						const topicMatch = item.TopicID ? item.TopicID == parseInt(topicId) : false;
-						return topicMatch;
-					});
+	<footer class="site-footer">
+		<div class="wrap">StrokesPlus and StrokesPlus.net are no longer developed. Their successor is <a href="https://input.observer">Input.Observer</a>.</div>
+	</footer>
 
-					displayData(filteredData, null);				
-				}
-				else if(userName){
-					const filteredData = jsonData.filter(item => {
-						const topicMatch = item.TopicPostedBy ? item.TopicPostedBy == userName : false;
-						const msgMatch = item.MessagePostedBy ? item.MessagePostedBy == userName : false;
-						return topicMatch || msgMatch;
-					});
-
-					displayData(filteredData, null);						
-				}
-				else {
-					displayForums();
-				}
-            } catch (error) {
-                resultsContainer.innerHTML = `<p style="color:red;">Error loading JSON file: ${error.message}</p>`;
-                console.error("Error fetching data:", error);
-            }
-        }
-
-		function displayForums() {
-			var forumName = new URLSearchParams(window.location.search).get('f');
-			if(forumName == "null") forumName = "";
-			const seenForums = new Set();
-			const distinctForums = jsonData.filter(item => {
-			  if (seenForums.has(`${item.Category}|||${item.Forum}`) || (forumName ?? item.Forum) != item.Forum) return false;
-			  seenForums.add(`${item.Category}|||${item.Forum}`);
-			  return true;
-			});	
-
-			if(forumName) {
-				const seenTopics = new Set();
-				const distinctTopics = jsonData.filter(item => {
-				  if (seenTopics.has(item.TopicID) || (forumName ?? item.Forum) != item.Forum) return false;
-				  seenTopics.add(item.TopicID);
-				  return true;
-				});				
-			
-				displayData(distinctTopics, null);	
-			} else {
-				resultsContainer.innerHTML = distinctForums.map(item => `
-					<div class="item">
-						<p><b><a href="/?f=${encodeURIComponent(item.Forum)}">${item.Category || 'No Category'} - ${item.Forum || 'No Forum'}</a></b></p>
-					</div>
-				`).join('');
-			}
-			
-		}
-
-        // 2. Display the data dynamically in the HTML DOM
-        async function displayData(items, searchTerm) {
-            if (items.length === 0) {
-                resultsContainer.innerHTML = '<p class="no-results">No matches found.</p>';
-                return;
-            }
-			showOverlay();
-			await delay(20);
-			
-			var pageNumber = new URLSearchParams(window.location.search).get('p');
-			if(pageNumber == "null") pageNumber = "";
-			var pagedList;
-			var previous = "";
-			var next = "";
-			
-			if(items.length > 100){
-				var page = parseInt(pageNumber)
-				if(!pageNumber){
-					page = 1;
-				}
-				var endIndex = ((page - 1) * 100) + 99;
-				if(endIndex > items.length - 1) {
-					endIndex = items.length - 1	;
-				}
-				pagedList = items.slice((page - 1) * 100, endIndex);
-				
-				var topicId = new URLSearchParams(window.location.search).get('t');
-				var userName = new URLSearchParams(window.location.search).get('u');
-				var forumName = new URLSearchParams(window.location.search).get('f');
-				if(topicId == "null") topicId = "";
-				if(userName == "null") userName = "";
-				if(forumName == "null") forumName = "";
-				
-				if(page > 1) {
-					previous = `<p><b><a href='/?t=${topicId}&u=${encodeURIComponent(userName)}&p=${page-1}&t=${topicId}&f=${encodeURIComponent(forumName)}'>Previous</a></b></p>`;
-				}
-				
-				if(endIndex + 1 < items.length){
-					next = `<p><b><a href='/?t=${topicId}&u=${encodeURIComponent(userName)}&p=${page+1}&f=${encodeURIComponent(forumName)}'>Next</a></b></p>`;
-				}
-				
-			} else {
-				pagedList = items;
-			}
-			
-			var forumHeading = "";
-			if(forumName) {
-				if(pagedList.length >= 0) {
-					forumHeading = `<div class="item"><p><b>${pagedList[0].Category || 'No Category'} - ${pagedList[0].Forum || 'No Forum'}</b></p></div>`			
-				}
-			}
-			
-			const formatter = new Intl.DateTimeFormat('en-US', {
-			  dateStyle: 'medium',
-			  timeStyle: 'short'
-			});
-			
-            resultsContainer.innerHTML = forumHeading + previous + pagedList.map((item,index) => `
-                <div class="item">
-                    <h3 class="search"><a href='/?t=${item.TopicID}'>${item.Topic || 'No Title'}</a></h3>
-					<p><b>${item.Category || 'No Category'} - ${item.Forum || 'No Forum'}</b></p>
-					<p>Topic By: <a href='/?u=${encodeURIComponent(item.TopicPostedBy)}'><b>${item.TopicPostedBy}</b></a> on ${item.TopicPostedOn.replace('T',' ')} - Message By: <a href='/?u=${encodeURIComponent(item.MessagePostedBy)}'><b>${item.MessagePostedBy}</b></a> on ${item.MessagePostedOn.replace('T',' ')}</p>
-					<hr />
-					<p class="search">${archiveLinks(item.Message) || 'No Message'}</p>
-                </div>
-            `).join('') + next;
-			
-			if(pagedList.length != items.length){
-				console.log(`show pager - pagedList.length: ${pagedList.length} - items.length: ${items.length}`);
-			}
-			
-			if(searchTerm) {
-				const searchString = searchTerm;
-
-				// Find text ranges
-				const treeWalker = document.createTreeWalker(
-				  document.body, 
-				  NodeFilter.SHOW_TEXT, 
-				  {
-					acceptNode: (node) => {
-					  // Check if it's a div and has the required class
-					  if (true
-					    /*(node.parentNode.nodeName.toLowerCase() === 'p'
-							||
-							node.parentNode.nodeName.toLowerCase() === 'pre'
-							||
-							node.parentNode.nodeName.toLowerCase() === 'blockquote'
-							||
-							node.parentNode.nodeName.toLowerCase() === 'h3'
-							) 
-						&& node.parentNode.classList.contains("search")*/
-						) {
-						return NodeFilter.FILTER_ACCEPT;
-					  }
-					  return NodeFilter.FILTER_SKIP;
-					}
-				  }
-				);				
-				const ranges = [];
-				let currentNode;
-
-				while (currentNode = treeWalker.nextNode()) {
-				  const index = currentNode.nodeValue.toLowerCase().indexOf(searchString.toLowerCase());
-				  if (index >= 0) {
-					const range = new Range();
-					range.setStart(currentNode, index);
-					range.setEnd(currentNode, index + searchString.length);
-					ranges.push(range);
-				  }
-				}
-				// Create highlight and apply
-				const searchHighlight = new Highlight(...ranges);
-				CSS.highlights.set("search-results", searchHighlight);			
-			}
-			//if (document.readyState === "loading") {
-			//  document.addEventListener("DOMContentLoaded", hideOverlay);
-			//} else {
-			await delay(500);
-			  hideOverlay();
-			//}			
-						
-        }
-
-        // 3. Search and filter logic
-        searchBox.addEventListener('input', (e) => {
-			clearTimeout(typingTimer);
-			
-			// Start a new countdown
-			typingTimer = setTimeout(() => {
-				var inputElement = document.querySelector('#searchBox');
-				console.log("User stopped typing. Final value:", inputElement.value);
-				
-				const searchTerm = inputElement.value.toLowerCase();
-				
-				if(true /*searchTerm.indexOf(' ') == -1*/) {
-				
-					var forumName = new URLSearchParams(window.location.search).get('f');
-					if(forumName == "null") forumName = "";
-					const filteredData = jsonData.filter(item => {
-						const topicMatch = item.Topic ? item.Topic.toLowerCase().includes(searchTerm) : false;
-						const descMatch = item.Description ? item.Description.toLowerCase().includes(searchTerm) : false;
-						const msgMatch = item.Message ? item.Message.toLowerCase().includes(searchTerm) : false;
-						return (topicMatch || descMatch || msgMatch) && ((forumName ?? item.Forum) == item.Forum);
-					});
-					displayData(filteredData, searchTerm);
-					
-				} else {
-					//This works well for an OR, but not great results, should be AND
-					const searchTerms = searchTerm.split(" ");
-					const filteredData = jsonData.filter(item => {
-						const topicText = item.Topic.toLowerCase();
-						const descText = item.Description.toLowerCase();
-						const msgText = item.Message.toLowerCase();
-						const topicMatch = item.Topic ? searchTerms.some(term => topicText.includes(term.toLowerCase())) : false;
-						const descMatch = item.Description ? searchTerms.some(term => descText.includes(term.toLowerCase())) : false;
-						const msgMatch = item.Message ? searchTerms.some(term => msgText.includes(term.toLowerCase())) : false;
-						return topicMatch || descMatch || msgMatch;
-					});				
-					displayData(filteredData, searchTerm);
-				}
-				
-				/*
-				const regexString = searchTerm.split("").join(".*");
-				const fuzzyRegex = new RegExp(regexString, "i");	
-				
-				const filteredData = jsonData.filter(item => {
-					const topicMatch = item.Topic ? fuzzyRegex.test(item.Topic) : false;
-					const descMatch = item.Description ? fuzzyRegex.test(item.Description) : false;
-					const msgMatch = item.Message ? fuzzyRegex.test(item.Message) : false;
-					return topicMatch || descMatch || msgMatch;
-				});
-				displayData(filteredData, searchTerm);
-				*/
-				
-
-			}, doneTypingInterval);
-        });
-
-        // Initialize script
-        loadData();
-		
-		let typingTimer;
-		const doneTypingInterval = 1000; // Time in milliseconds (1.0 seconds)
-		const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-		
-		// Links to topics on the old forums point at the same topic in this archive (the topic IDs match).
-		function archiveLinks(html) {
-			if (!html) return html;
-			return html
-				.replace(/(?:https?:\/\/)?(?:www\.)?strokesplus\.com\/forum\/topic\.asp\?(?:[^'"\s<]*?&)?TOPIC_ID=(\d+)[^'"\s<]*/gi, 'https://strokesplus.net/cindex.html?t=$1')
-				.replace(/https?:\/\/(?:www\.)?strokesplus\.com\/forum\/topic\/(\d+)(?:\/[\w-]*)?/gi, 'https://strokesplus.net/cindex.html?t=$1')
-				.replace(/https?:\/\/forum\.strokesplus\.net\/posts\/t(\d+)(?:-[\w-]*)?/gi, 'https://strokesplus.net/?t=$1')
-				.replace(/https?:\/\/forum\.strokesplus\.net\/?(?=['"\s<]|$)/gi, 'https://strokesplus.net/');
-		}
-
-		const overlay = document.getElementById('waitOverlay');
-		
-		function showOverlay() {
-		  overlay.classList.add('active');
-		  document.body.classList.add('is-waiting');
-		}
-
-		function hideOverlay() {
-		  overlay.classList.remove('active');
-		  document.body.classList.remove('is-waiting');
-		}		
-		
-    </script>
-
-
+	<script src="/assets/archive.js"></script>
 </body>
 </html>
