@@ -47,8 +47,13 @@
   --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 }
 
+:root[data-theme='light'] { color-scheme: light; }
+:root[data-theme='dark'] { color-scheme: dark; }
+
+/* Dark tokens: the system setting unless the theme switch picked Light, or the switch picked Dark.
+   The two blocks are identical; change both. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     --io-bg: #17161a;
     --io-bg-raised: #1c1b20;
     --io-surface: #1e1d22;
@@ -70,6 +75,29 @@
     --io-grid: rgba(236, 234, 230, 0.07);
     --io-shadow: rgba(0, 0, 0, 0.6);
   }
+}
+
+:root[data-theme='dark'] {
+    --io-bg: #17161a;
+    --io-bg-raised: #1c1b20;
+    --io-surface: #1e1d22;
+    --io-surface-muted: #1c1b20;
+    --io-border: #2e2c33;
+    --io-border-subtle: #26252b;
+    --io-text: #eceae6;
+    --io-text-secondary: #cfcbc4;
+    --io-text-muted: #a8a39a;
+    --io-accent: #8b85f5;
+    --io-accent-text: #cfc9ff;
+    --io-accent-bg: #312b6b;
+    --io-accent-border: #4a4396;
+    --io-on-accent: #17161a;
+    --io-warn-bg: #5c450f;
+    --io-warn-text: #fde68a;
+    --io-danger-text: #f87171;
+    --io-trail: #4c93f5;
+    --io-grid: rgba(236, 234, 230, 0.07);
+    --io-shadow: rgba(0, 0, 0, 0.6);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -130,6 +158,31 @@ a:hover { color: var(--io-text); }
 .site-nav a:hover { background: var(--io-border-subtle); color: var(--io-text); }
 
 .site-nav a[aria-current='page'] { background: var(--io-accent-bg); color: var(--io-accent-text); }
+
+.header-end { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+
+/* Theme switch: System / Light / Dark, like the app's Appearance setting */
+.theme-switch {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--io-border);
+  border-radius: var(--io-radius);
+  background: var(--io-surface-muted);
+}
+
+.theme-switch button {
+  padding: 4px 10px;
+  border: 0;
+  border-radius: var(--io-radius-sm);
+  background: transparent;
+  color: var(--io-text-muted);
+  font: 600 0.8125rem/1.4 var(--font-body);
+  cursor: pointer;
+}
+
+.theme-switch button:hover { color: var(--io-text); }
+
+.theme-switch button[aria-pressed='true'] { background: var(--io-surface); color: var(--io-text); box-shadow: 0 1px 3px -1px var(--io-shadow); }
 
 main { padding-block: 32px 64px; }
 

@@ -7,6 +7,7 @@
 	<meta name="description" content="Read-only archive of the StrokesPlus.net forum and the final StrokesPlus.net download. StrokesPlus is now Input.Observer: gestures, hotkeys and text expansion for Windows.">
 	<link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="stylesheet" href="/assets/site.css">
+	<script>try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
 <body data-json="/data.json" data-base="/">
 	<div id="waitOverlay" aria-hidden="true"><div class="spinner"></div></div>
@@ -14,11 +15,18 @@
 	<header class="site-header">
 		<div class="wrap">
 			<a class="brand" href="/">StrokesPlus <span>archive</span></a>
-			<nav class="site-nav" aria-label="Archive">
-				<a href="/" aria-current="page">StrokesPlus.net</a>
-				<a href="/cindex.html">StrokesPlus (classic)</a>
-				<a href="https://input.observer/forum">Forum</a>
-			</nav>
+			<div class="header-end">
+				<nav class="site-nav" aria-label="Archive">
+					<a href="/" aria-current="page">StrokesPlus.net</a>
+					<a href="/cindex.html">StrokesPlus (classic)</a>
+					<a href="https://input.observer/forum">Forum</a>
+				</nav>
+				<div class="theme-switch" role="group" aria-label="Theme">
+					<button type="button" data-theme-value="system">System</button>
+					<button type="button" data-theme-value="light">Light</button>
+					<button type="button" data-theme-value="dark">Dark</button>
+				</div>
+			</div>
 		</div>
 	</header>
 
@@ -64,6 +72,7 @@
 		<div class="wrap">StrokesPlus and StrokesPlus.net are no longer developed. Their successor is <a href="https://input.observer">Input.Observer</a>.</div>
 	</footer>
 
+	<script src="/assets/theme.js"></script>
 	<script src="/assets/archive.js"></script>
 </body>
 </html>
